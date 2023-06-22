@@ -1,17 +1,19 @@
-import { galleryItems } from "./gallery-items.js";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+// Add imports above this line
+import { galleryItems } from './gallery-items';
 // Change code below this line
 
-const gallery = document.querySelector(".gallery");
+console.log(galleryItems);
 
-for (const image of galleryItems) {
-  const newItem = `<a class="gallery__link" href="${image.original}"> <img class="gallery__image" src="${image.preview}" data-source="${image.original}" alt="${image.description}"/></a>`;
-  gallery.insertAdjacentHTML("beforeend", newItem);
+const gallery = document.querySelector('.gallery');
+
+for (const item of galleryItems) {
+  const newItem = `<a class="gallery__link" href="${item.original}"> <img class="gallery__item" src="${item.preview}" alt="${item.description}" /> </a>`;
+  gallery.innerHTML += newItem;
 }
 
-gallery.addEventListener("click", (e) => {
-  e.preventDefault();
-  const instance = basicLightbox.create(
-    `<img src="${e.target.dataset.source}"/>`
-  );
-  instance.show();
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 200,
 });
