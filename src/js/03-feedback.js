@@ -24,7 +24,7 @@ const inputSave = throttle(e => {
 
 const submitForm = e => {
   e.preventDefault();
-  localStorage.clear();
+  localStorage.removeItem('feedback-form-state');
   form.reset();
 };
 
